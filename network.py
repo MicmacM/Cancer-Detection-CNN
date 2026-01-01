@@ -75,12 +75,10 @@ def test(model, device, loss_fn, test_loader):
             all_preds.extend(pred.cpu().numpy())
             all_targets.extend(target.cpu().numpy())
 
-    # Affichage du rapport complet (Precision, Recall, F1)
-    print("\n--- Rapport de Classification ---")
+    print("\n--- Classification report ---")
     print(classification_report(all_targets, all_preds, target_names=['Normal', 'Anormal']))
     
-    # Affichage de la matrice de confusion
-    print("--- Matrice de Confusion ---")
+    print("--- Confusion matrix ---")
     print(confusion_matrix(all_targets, all_preds))
     return loss.item(), accuracy
     
@@ -160,14 +158,14 @@ def main():
 
     
     plt.figure()
-    # Graphique de la Loss
+    # Loss plot
     plt.subplot(1, 2, 1)
     plt.plot(list(range(len(train_losses))), train_losses, 'b-', label='Train Loss')
     plt.plot(list(range(len(test_losses))), test_losses, 'r-', label='Test Loss')
     plt.title('Loss each epoch')
     plt.legend()
     
-    # Graphique de l'Accuracy
+    # Accuracy plot
     plt.subplot(1, 2, 2)
     plt.plot(list(range(len(train_accs))), train_accs, 'b-', label='Train Acc')
     plt.plot(list(range(len(test_accs))), test_accs, 'r-', label='Test Acc')
